@@ -52,6 +52,7 @@ public class VulkanizerskaRadnjaTest {
 		a.setSirina(200);
 		a.setVisina(60);
 		r.dodajGumu(a);
+		assertTrue(a.getMarkaModel(), r.pronadjiGumu("Michelin Alpin 5").contains(a));
 	}
 	
 	@Test(expected = java.lang.RuntimeException.class)
@@ -82,7 +83,10 @@ public class VulkanizerskaRadnjaTest {
 		a.setSirina(200);
 		a.setVisina(60);
 		r.dodajGumu(a);
-		assertEquals(1, r.pronadjiGumu("Michelin Alpin 5").size());
+		for (int i = 0; i < r.pronadjiGumu("Michelin Alpin 5").size(); i++) {
+					assertEquals(a.getMarkaModel(), r.pronadjiGumu("Michelin Alpin 5").get(i).getMarkaModel());
+
+		}
 	}
 	@Test
 	public void testPronadjiGumuNema() {
@@ -91,7 +95,9 @@ public class VulkanizerskaRadnjaTest {
 		a.setSirina(200);
 		a.setVisina(60);
 		r.dodajGumu(a);
-		assertEquals(0, r.pronadjiGumu("Alpa").size());
+		//assertEquals(0, r.pronadjiGumu("Alpa").size());  
+		assertFalse(a.getMarkaModel(), r.pronadjiGumu("Alpa").contains(a));
+
 	}
 	@Test
 	public void testPronadjiGumuNull() {
@@ -140,7 +146,11 @@ public class VulkanizerskaRadnjaTest {
 		a6.setSirina(211);
 		a6.setVisina(49);
 		r.dodajGumu(a6);
-		assertEquals(4, r.pronadjiGumu("Michelin Alpin 5").size());
+		assertEquals(4, r.pronadjiGumu("Michelin Alpin 5").size()); //Ako se u listi ne nalazi onoliko guma koliko ih zapravo ima, test ne prolazi
+		for (int i = 0; i < r.pronadjiGumu("Michelin Alpin 5").size(); i++) { //Ako barem jedna guma nije u redu, test ne prolazi
+			assertEquals(a.getMarkaModel(), r.pronadjiGumu("Michelin Alpin 5").get(i).getMarkaModel());
+
+}
 	}
 	
 	
